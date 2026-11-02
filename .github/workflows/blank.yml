@@ -1,0 +1,22 @@
+name: Compilar CatroPlayer.exe
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Descomprimir
+        shell: pwsh
+        run: Expand-Archive CatroPlayer-proyecto.zip -DestinationPath app
+      - name: Compilar
+        working-directory: app
+        run: |
+          npm install
+          npx electron-builder --win portable --publish never
+      - uses: actions/upload-artifact@v4
+        with:
+          name: CatroPlayer
+          path: app/dist/CatroPlayer.exe
