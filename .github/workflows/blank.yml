@@ -21,4 +21,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: CatroPlayer
-          path: app/dist/CatroPlayer.exe
+          path: app/dist/*.exe
